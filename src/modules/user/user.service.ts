@@ -1,13 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaClient } from '@prisma/client';
+import { PrismaService } from 'src/infra/db/prisma.service';
 import { UserDto } from './protocols/user-dto';
 
 @Injectable()
 export class UserService {
-  private readonly prisma: PrismaClient;
-  constructor(prisma: PrismaClient) {
-    this.prisma = prisma;
-  }
+  constructor(private prisma: PrismaService) {}
   async create(data: UserDto) {
     const userAlreadyExists = await this.prisma.user.findFirst({
       where: {
