@@ -58,15 +58,77 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Support
+api-fastify-prisma
+description: simple api to study fastify and plugins
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+status : (developing)
 
-## Stay in touch
+technologies used
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+[Docker]
+NodeJS
+[Fastfy]
+[prisma]
+
+
+wanna help me ? you can contribute with ?
+
+unity tests
+test integration
+swagger-docs
+product entity
+jwt token
+test integration
+clean architecture
+clean code
+add flutter interface
+
+
+USER ENDPOINTS
+
+Create a new user
+endpoint: http://localhost:3000/user
+method: POST
+request body
+
+
+- properties : {
+
+    - name : string 
+    - email: string     
+}
+
+
+update user
+endpoint: http://localhost:3000/user/:id
+method: PUT
+request body
+request params
+
+
+- properties : {
+
+    - name : string 
+    - email: string     
+}
+
+
+
+delete user
+endpoint: http://localhost:3000/user/:id
+method: DELETE
+request params
+
+
+get all users
+endpoint: http://localhost:3000/user/
+method: GET
+
+Developed for: Savio Picanço Do Espirito Santo Brito
+
+📝 License
+This project is licensed under the MIT License - see the LICENSE file for details.
+
 
 ## License
 
