@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/infra/db/prisma.service';
-import { InvalidParamsError } from 'src/presentation/errors/invalid-paramn-error';
+import { InvalidParamError } from 'src/presentation/errors/invalid-param-error';
 import { UserDto } from './protocols/user-dto';
 
 @Injectable()
@@ -15,7 +15,7 @@ export class UserService {
     });
 
     if (EmailAlreadyInUse) {
-      throw new InvalidParamsError('email');
+      return new InvalidParamError('email');
     }
 
     const user = await this.prisma.user.create({
@@ -37,7 +37,7 @@ export class UserService {
     });
 
     if (!userExists) {
-      throw new Error('User does not exist');
+      return new Error('User does not exist');
     }
     return await this.prisma.user.update({ data, where: { id } });
   }

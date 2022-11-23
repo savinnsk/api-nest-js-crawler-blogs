@@ -6,12 +6,12 @@ import {
   Param,
   Post,
   Put,
+  Res,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { badRequest, ok } from 'src/presentation/helpers/http';
-import { HttpResponse } from 'src/presentation/protocols/http-protocols';
 import { UserDto } from './protocols/user-dto';
 import { UserService } from './user.service';
+import { FastifyReply } from 'fastify';
 
 @ApiTags('users')
 @Controller('user')
@@ -24,22 +24,36 @@ export class UserController {
   async create(@Body() data: UserDto) {
     try {
       const user = await this.userService.create(data);
-      return ok(user);
+      return user;
     } catch (e) {
-      return badRequest(e);
+      return e;
     }
   }
 
   @Get()
-  async findAll(): Promise<HttpResponse> {
-    const users = await this.userService.findAll();
-
-    return { statusCode: 201, body: users };
+  async findAll(@Res() res: FastifyReply) {
+    try {
+      const users = await this.userService.findAll();
+      return res.code(201).send(users);
+    } catch (e) {
+      return e;
+    }
   }
 
   @Put(':id')
-  async update(@Param('id') id: string, @Body() data: UserDto) {
-    return this.userService.update(id, data);
+  async update(
+    @Param('id') id: string,
+    @Res() res: FastifyReply,
+    @Body() data: UserDto,
+  ) {
+    try {
+      const user = await this.userService.update(id, data);
+      return res
+        .code(201)
+        .send({ message: 'user updated with success', body: user });
+    } catch (err) {
+      return res.code(500).send({ message: 'Error', body: err });
+    }
   }
 
   @Delete(':id')
