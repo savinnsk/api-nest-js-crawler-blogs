@@ -11,7 +11,7 @@ export class User {
 
   @ApiProperty({
     description: 'password to protect user account',
-    example: 'hackme',
+    example: '123',
   })
   password: string;
 
