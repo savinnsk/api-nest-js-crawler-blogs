@@ -4,9 +4,9 @@ import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
-//import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { swaggerSetup } from './config/swagger';
+import { setupPipes } from './config/validation-pipes';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -15,15 +15,7 @@ async function bootstrap() {
   );
 
   swaggerSetup(app);
-
-  // Pipes
-  app.useGlobalPipes(
-    new ValidationPipe({
-      transform: true,
-      whitelist: true,
-      forbidNonWhitelisted: true,
-    }),
-  );
+  setupPipes(app);
 
   await app.listen(3000, '0.0.0.0');
 }
