@@ -1,12 +1,6 @@
-
 # API NEST WITH FASTIFY
 
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
-
-
-
+# Swagger documentation running at http://localhost:3000/api/
 
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
 [circleci-url]: https://circleci.com/gh/nestjs/nest
@@ -66,18 +60,17 @@ $ npm run test:cov
 
 wanna help me ? you can contribute with ?
 
-unity tests
-test integration
-swagger-docs
-product entity
-jwt token
-test integration
-clean architecture
-clean code
-add flutter interface
+- unity tests
+- test integration
+- swagger-docs
+- product entity
+- jwt token
+- test integration
+- clean architecture
+- clean code
+- add flutter interface
 
 
-# Swagger documentation running at http://localhost:3000/api/
 
 ## USER ENDPOINTS
 
