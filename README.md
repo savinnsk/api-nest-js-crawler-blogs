@@ -77,6 +77,8 @@ clean code
 add flutter interface
 
 
+# Swagger documentation running at http://localhost:3000/api/
+
 ## USER ENDPOINTS
 
 ### Create a new user
