@@ -84,9 +84,9 @@ clean code
 add flutter interface
 
 
-USER ENDPOINTS
+## USER ENDPOINTS
 
-Create a new user
+### Create a new user
 endpoint: http://localhost:3000/user
 method: POST
 request body
@@ -99,7 +99,7 @@ request body
 }
 
 
-update user
+### update user
 endpoint: http://localhost:3000/user/:id
 method: PUT
 request body
@@ -114,13 +114,13 @@ request params
 
 
 
-delete user
+### delete user
 endpoint: http://localhost:3000/user/:id
 method: DELETE
 request params
 
 
-get all users
+### get all users
 endpoint: http://localhost:3000/user/
 method: GET
 
