@@ -4,8 +4,9 @@ import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+//import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
+import { swaggerSetup } from './config/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -13,14 +14,7 @@ async function bootstrap() {
     new FastifyAdapter(),
   );
 
-  const config = new DocumentBuilder()
-    .setTitle('nest with fastify')
-    .setDescription('SIMPLE API TO STUDY NEST WITH FASTIFY')
-    .setVersion('1.0')
-    .addTag('users')
-    .build();
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  swaggerSetup(app);
 
   // Pipes
   app.useGlobalPipes(
