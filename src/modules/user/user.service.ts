@@ -1,4 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { hashPassword } from 'src/data/bcrypt/bcrypt-helper';
 import { PrismaService } from 'src/infra/db/prisma.service';
 import { InvalidParamError } from 'src/presentation/errors/invalid-param-error';
 import { UserDto } from './protocols/user-dto';
@@ -7,16 +8,24 @@ import { UserDto } from './protocols/user-dto';
 export class UserService {
   constructor(private prisma: PrismaService) {}
 
-  async create(data: UserDto) {
+  async create(dataCreateUser: UserDto) {
+    const { password, email } = dataCreateUser;
+
     const EmailAlreadyInUse = await this.prisma.user.findFirst({
       where: {
-        email: data.email,
+        email: email,
       },
     });
 
     if (EmailAlreadyInUse) {
       return new InvalidParamError('email');
     }
+
+    const data = {
+      ...dataCreateUser,
+      password: await hashPassword(password),
+      email,
+    };
 
     const user = await this.prisma.user.create({
       data,
