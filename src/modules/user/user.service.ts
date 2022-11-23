@@ -26,4 +26,17 @@ export class UserService {
   async findAll() {
     return this.prisma.user.findMany();
   }
+
+  async update(id: string, data: UserDto) {
+    const userExists = this.prisma.user.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!userExists) {
+      throw new Error('User does not exist');
+    }
+    return await this.prisma.user.update({ data, where: { id } });
+  }
 }
