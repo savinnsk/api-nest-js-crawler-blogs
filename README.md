@@ -58,19 +58,6 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-api-fastify-prisma
-description: simple api to study fastify and plugins
-
-status : (developing)
-
-technologies used
-
-[Docker]
-NodeJS
-[Fastfy]
-[prisma]
-
-
 wanna help me ? you can contribute with ?
 
 unity tests
