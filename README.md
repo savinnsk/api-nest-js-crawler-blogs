@@ -50,48 +50,25 @@ wanna help me ? you can contribute with ?
 - clean code
 - add flutter interface
 
-
-
 ## USER ENDPOINTS
 
 ### Create a new user
-endpoint: http://localhost:3000/user
-method: POST
-request body
 
-
-- properties : {
-
-    - name : string 
-    - email: string     
-}
+- **endpoint: http://localhost:3000/user**
 
 
 ### update user
-- endpoint: http://localhost:3000/user/:id
-- method: PUT
-- request body
-- request params
-
-
-- properties : {
-
-    - name : string 
-    - email: string     
-}
-
+- **endpoint: http://localhost:3000/user/:id**
 
 
 ### delete user
 
-- endpoint: http://localhost:3000/user/:id
-- method: DELETE
-- request params
+- **endpoint: http://localhost:3000/user/:id**
 
 
 ### get all users
-- endpoint: http://localhost:3000/user/
-- method: GET
+- **endpoint: http://localhost:3000/user/**
+
 
 Developed for: Savio Picanço Do Espirito Santo Brito
 
