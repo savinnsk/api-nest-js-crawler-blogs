@@ -5,6 +5,7 @@ import { UserDto } from './protocols/user-dto';
 @Injectable()
 export class UserService {
   constructor(private prisma: PrismaService) {}
+
   async create(data: UserDto) {
     const userAlreadyExists = await this.prisma.user.findFirst({
       where: {
@@ -38,5 +39,18 @@ export class UserService {
       throw new Error('User does not exist');
     }
     return await this.prisma.user.update({ data, where: { id } });
+  }
+
+  async delete(id: string) {
+    const userExists = this.prisma.user.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!userExists) {
+      throw new Error('User does not exist');
+    }
+    return await this.prisma.user.delete({ where: { id } });
   }
 }
