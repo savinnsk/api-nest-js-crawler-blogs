@@ -68,10 +68,10 @@ request body
 
 
 ### update user
-endpoint: http://localhost:3000/user/:id
-method: PUT
-request body
-request params
+- endpoint: http://localhost:3000/user/:id
+- method: PUT
+- request body
+- request params
 
 
 - properties : {
@@ -83,14 +83,15 @@ request params
 
 
 ### delete user
-endpoint: http://localhost:3000/user/:id
-method: DELETE
-request params
+
+- endpoint: http://localhost:3000/user/:id
+- method: DELETE
+- request params
 
 
 ### get all users
-endpoint: http://localhost:3000/user/
-method: GET
+- endpoint: http://localhost:3000/user/
+- method: GET
 
 Developed for: Savio Picanço Do Espirito Santo Brito
 
