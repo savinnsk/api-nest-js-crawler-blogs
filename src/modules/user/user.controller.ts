@@ -8,6 +8,8 @@ import {
   Put,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import { badRequest, ok } from 'src/presentation/helpers/http';
+import { HttpResponse } from 'src/presentation/protocols/http-protocols';
 import { UserDto } from './protocols/user-dto';
 import { UserService } from './user.service';
 
@@ -20,12 +22,19 @@ export class UserController {
 
   @Post()
   async create(@Body() data: UserDto) {
-    return this.userService.create(data);
+    try {
+      const user = await this.userService.create(data);
+      return ok(user);
+    } catch (e) {
+      return badRequest(e);
+    }
   }
 
   @Get()
-  async findAll() {
-    return this.userService.findAll();
+  async findAll(): Promise<HttpResponse> {
+    const users = await this.userService.findAll();
+
+    return { statusCode: 201, body: users };
   }
 
   @Put(':id')
