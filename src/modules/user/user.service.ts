@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/infra/db/prisma.service';
 import { InvalidParamError } from 'src/presentation/errors/invalid-param-error';
 import { UserDto } from './protocols/user-dto';
@@ -37,7 +37,7 @@ export class UserService {
     });
 
     if (!userExists) {
-      return new Error('User does not exist');
+      return new HttpException('User does not exist', HttpStatus.BAD_REQUEST);
     }
     return await this.prisma.user.update({ data, where: { id } });
   }

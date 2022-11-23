@@ -52,12 +52,16 @@ export class UserController {
         .code(201)
         .send({ message: 'user updated with success', body: user });
     } catch (err) {
-      return res.code(500).send({ message: 'Error', body: err });
+      return err;
     }
   }
 
   @Delete(':id')
   async delete(@Param('id') id: string) {
-    return this.userService.delete(id);
+    try {
+      return this.userService.delete(id);
+    } catch (err) {
+      return err;
+    }
   }
 }
