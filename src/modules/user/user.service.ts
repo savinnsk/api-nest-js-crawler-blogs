@@ -38,6 +38,14 @@ export class UserService {
     return this.prisma.user.findMany();
   }
 
+  async findByEmail(email: string) {
+    return await this.prisma.user.findFirst({
+      where: {
+        email: email,
+      },
+    });
+  }
+
   async update(id: string, data: UserDto) {
     const userExists = this.prisma.user.findUnique({
       where: {
