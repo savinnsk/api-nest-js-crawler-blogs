@@ -11,13 +11,9 @@ export class UserService {
   async create(dataCreateUser: UserDto) {
     const { password, email } = dataCreateUser;
 
-    const EmailAlreadyInUse = await this.prisma.user.findFirst({
-      where: {
-        email: email,
-      },
-    });
+    const UserAlreadyExists = this.findByEmail(email);
 
-    if (EmailAlreadyInUse) {
+    if (UserAlreadyExists) {
       return new InvalidParamError('email');
     }
 
