@@ -3,44 +3,19 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
-import { Reflector } from '@nestjs/core';
-// Password
 import { AuthGuard } from '@nestjs/passport';
-import { UnauthorizedError } from 'src/presentation/errors/unauthorized-error';
-// Decorators
-import { IS_PUBLIC_KEY } from '../decorators/is-public-decorator';
-// Error Handling
 
 @Injectable()
-export class JwtAuthGuard extends AuthGuard('jwt') {
-  constructor(private reflector: Reflector) {
-    super();
+export class LocalAuthGuard extends AuthGuard('local') {
+  canActivate(context: ExecutionContext) {
+    return super.canActivate(context);
   }
 
-  canActivate(context: ExecutionContext): Promise<boolean> | boolean {
-    const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
-      context.getHandler(),
-      context.getClass(),
-    ]);
-
-    if (isPublic) {
-      return true;
+  handleRequest(err, user) {
+    if (err || !user) {
+      throw new UnauthorizedException(err?.message);
     }
 
-    const canActivate = super.canActivate(context);
-
-    if (typeof canActivate === 'boolean') {
-      return canActivate;
-    }
-
-    const canActivatePromise = canActivate as Promise<boolean>;
-
-    return canActivatePromise.catch((error) => {
-      if (error instanceof UnauthorizedError) {
-        throw new UnauthorizedException(error.message);
-      }
-
-      throw new UnauthorizedException();
-    });
+    return user;
   }
 }
