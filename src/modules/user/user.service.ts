@@ -31,7 +31,7 @@ export class UserService {
       data,
     });
 
-    return user;
+    return { ...user, password: undefined };
   }
 
   async findAll() {
