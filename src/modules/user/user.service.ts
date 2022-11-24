@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { hashPassword } from 'src/data/bcrypt/bcrypt-helper';
+import { hashPassword } from 'src/infra/cryptograpy/bcrypt/bcrypt-helper';
 import { PrismaService } from 'src/infra/db/prisma.service';
 import { InvalidParamError } from 'src/presentation/errors/invalid-param-error';
 import { UserDto } from './protocols/user-dto';
