@@ -3,9 +3,12 @@ import {
   HttpCode,
   HttpStatus,
   Post,
+  Request,
   UseGuards,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import { FastifyRequest } from 'fastify';
+import { AuthRequest } from 'src/domain/auth/protocols/auth-request';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './guards/local-auth-guard';
 
@@ -17,7 +20,7 @@ export class AuthController {
   @Post('login')
   @UseGuards(LocalAuthGuard)
   @HttpCode(HttpStatus.OK)
-  login() {
-    //return this.authService.login();
+  login(@Request() req: AuthRequest) {
+    return this.authService.login(req.user);
   }
 }
