@@ -8,10 +8,11 @@ import {
   Put,
   Res,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { UserDto } from './protocols/user-dto';
 import { UserService } from './user.service';
 import { FastifyReply } from 'fastify';
+import { IsPublic } from 'src/infra/auth/decorators/is-public.decorator';
 
 @ApiTags('users')
 @Controller('user')
@@ -20,6 +21,7 @@ export class UserController {
     this.userService = userService;
   }
 
+  @IsPublic()
   @Post()
   async create(@Body() data: UserDto) {
     try {
@@ -30,6 +32,7 @@ export class UserController {
     }
   }
 
+  @ApiBearerAuth()
   @Get()
   async findAll(@Res() res: FastifyReply) {
     try {
@@ -40,6 +43,7 @@ export class UserController {
     }
   }
 
+  @ApiBearerAuth()
   @Put(':id')
   async update(
     @Param('id') id: string,
@@ -56,6 +60,7 @@ export class UserController {
     }
   }
 
+  @ApiBearerAuth()
   @Delete(':id')
   async delete(@Param('id') id: string) {
     try {

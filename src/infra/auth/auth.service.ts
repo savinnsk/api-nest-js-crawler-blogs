@@ -27,17 +27,18 @@ export class AuthService {
       access_token: jwtToken,
     };
   }
-  async validateUser(LoginFields: LoginFields) {
-    const { email, password } = LoginFields;
+
+  async validateUser(loginFields: LoginFields) {
+    const { email, password } = loginFields;
     const user = await this.userService.findByEmail(email);
-
     if (user) {
-      await comparePassword(user.password, password);
-
-      return {
-        ...user,
-        password: undefined,
-      };
+      const isValid = await comparePassword(password, user.password);
+      if (isValid) {
+        return {
+          ...user,
+          password: undefined,
+        };
+      }
     }
 
     throw new InvalidParamError('Email or password');

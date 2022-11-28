@@ -11,7 +11,7 @@ export class UserService {
   async create(dataCreateUser: UserDto) {
     const { password, email } = dataCreateUser;
 
-    const UserAlreadyExists = this.findByEmail(email);
+    const UserAlreadyExists = await this.findByEmail(email);
 
     if (UserAlreadyExists) {
       return new InvalidParamError('email');
