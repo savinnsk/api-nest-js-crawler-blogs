@@ -49,10 +49,18 @@ export class UserService {
       },
     });
 
+    const dataUserUpdate = {
+      ...data,
+      password: await hashPassword(data.password),
+    };
+
     if (!userExists) {
       return new HttpException('User does not exist', HttpStatus.BAD_REQUEST);
     }
-    return await this.prisma.user.update({ data, where: { id } });
+    return await this.prisma.user.update({
+      data: dataUserUpdate,
+      where: { id },
+    });
   }
 
   async delete(id: string) {
