@@ -54,7 +54,7 @@ export class UserController {
       const user = await this.userService.update(id, data);
       return res
         .code(201)
-        .send({ message: 'user updated with success', body: user });
+        .send({ message: `user ${user.name} updated with success` });
     } catch (err) {
       return err;
     }
@@ -62,9 +62,12 @@ export class UserController {
 
   @ApiBearerAuth()
   @Delete(':id')
-  async delete(@Param('id') id: string) {
+  async delete(@Param('id') id: string, @Res() res: FastifyReply) {
     try {
-      return this.userService.delete(id);
+      const user = await this.userService.delete(id);
+      return res
+        .code(201)
+        .send({ message: `user ${user.name} deleted with success` });
     } catch (err) {
       return err;
     }
