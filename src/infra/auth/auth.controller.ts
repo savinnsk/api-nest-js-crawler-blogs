@@ -1,4 +1,5 @@
 import {
+  Body,
   Controller,
   HttpCode,
   HttpStatus,
@@ -8,8 +9,9 @@ import {
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { AuthRequest } from 'src/domain/auth/protocols/auth-request';
+import { LoginFields } from 'src/domain/auth/protocols/login-fields';
 import { AuthService } from './auth.service';
-import { LocalAuthGuard } from './guards/local-auth-guard';
+import { LocalAuthGuard } from './guards/local-auth.guard';
 
 @Controller()
 export class AuthController {
@@ -19,7 +21,7 @@ export class AuthController {
   @Post('login')
   @UseGuards(LocalAuthGuard)
   @HttpCode(HttpStatus.OK)
-  login(@Request() req: AuthRequest) {
+  login(@Request() req: AuthRequest, @Body() data: LoginFields) {
     return this.authService.login(req.user);
   }
 }
