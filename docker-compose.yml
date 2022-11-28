@@ -1,0 +1,30 @@
+version: "3.7"
+
+services:
+  database_app:
+    image: postgres
+    container_name: nestjs-db
+    restart: always
+    ports:
+      - 8080:8080
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=nestjs-db
+    volumes:
+    - pgdata:/data/postgres
+    ## network_mode: host
+  app:
+    build: .
+    container_name: app
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/usr/app
+      - /home/node_modules
+    ## network_mode: host
+
+
+volumes:
+  pgdata:
+    driver: local 
