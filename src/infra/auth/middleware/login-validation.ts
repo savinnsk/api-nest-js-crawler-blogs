@@ -6,7 +6,7 @@ import {
 import { HookHandlerDoneFunction, FastifyReply } from 'fastify';
 
 import { validate } from 'class-validator';
-import { LoginRequestBody } from 'src/domain/auth/protocols/login-request-body';
+import { LoginRequestBody } from 'src/auth/dto/login-request-body';
 
 @Injectable()
 export class LoginValidationMiddleware implements NestMiddleware {

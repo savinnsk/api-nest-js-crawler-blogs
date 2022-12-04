@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { hashPassword } from 'src/infra/cryptograpy/bcrypt/bcrypt-helper';
 import { PrismaService } from 'src/infra/db/prisma.service';
 import { InvalidParamError } from 'src/presentation/errors/invalid-param-error';
-import { UserDto } from './protocols/user-dto';
+import { UserDto } from 'src/protocols/dto/user-dto';
 
 @Injectable()
 export class UserService {

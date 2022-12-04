@@ -9,10 +9,10 @@ import {
   Res,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { UserDto } from './protocols/user-dto';
-import { UserService } from './user.service';
 import { FastifyReply } from 'fastify';
 import { IsPublic } from 'src/infra/auth/decorators/is-public.decorator';
+import { UserDto } from 'src/protocols/dto/user-dto';
+import { UserService } from 'src/services/user.service';
 
 @ApiTags('users')
 @Controller('user')
